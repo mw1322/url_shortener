@@ -8,7 +8,6 @@ async function handleUserSignUp(req, res) {
     name,
     email,
     password,
-    
   });
   return res.render("home");
 }
@@ -20,11 +19,13 @@ async function handleUserLogin(req, res) {
     return res.render("login", {
       error: "Invalid Username or Password",
     });
-  const sessionId = uuidv4();
-  setUser(sessionId, user);
-  res.cookie("uid", sessionId);
+  const token = setUser(user);
+  // res.cookie("uid", token);
   // console.log(req.us);
-  return res.redirect("/");
+  // return res.redirect("/");
+  return res.json({
+    token : token
+  });
 }
 
 export { handleUserSignUp, handleUserLogin };

@@ -17,3 +17,7 @@ To get started with this project, follow these steps:
 1. **Clone the Repository:**
    ```bash
    git clone <repository-url>
+
+
+2. **Topics that I learned:**
+  Stateless Authentication: This is a technique where the server does not store any session state. Instead, each request from the client must include all the information needed for authentication. This approach often uses tokens that are validated with each request.
