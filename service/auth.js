@@ -3,12 +3,15 @@ const secretKey = "Manish123@12";
 function setUser(user) {
   return jwt.sign(
     {
+      _id:user._id,
       username: user.name,
       email: user.email,
+      role:user.role
     },
     secretKey
   );
 }
+
 function getUser(token) {
   if (!token) return null;
   try {

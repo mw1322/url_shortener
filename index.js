@@ -10,8 +10,7 @@ dotenv.config({
 });
 connectDb();
 import path from "path";
-import URL from "./models/url.js";
-import { checkAuth, restrictToLoggedinUserOnly } from "./middlewares/auth.js";
+import { checkForAuthentication, roleCheck } from "./middlewares/auth.js";
 const app = express();
 
 app.set("view engine", "ejs");
@@ -27,7 +26,7 @@ app.listen(PORT, () => {
 });
 
 //Routes;
-
-app.use("/url", restrictToLoggedinUserOnly, urlRoute);
+app.use(checkForAuthentication);
+app.use("/url", roleCheck(["Normal", "Admin"]), urlRoute);
 app.use("/user", userRoute);
-app.use("/", checkAuth, staticRouter);
+app.use("/", staticRouter);
